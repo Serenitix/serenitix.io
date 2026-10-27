@@ -835,3 +835,12 @@ a.secondaryButton {
     /* the mark is navy line art on transparent; flip it light for the dark theme */
     filter: invert(1) hue-rotate(180deg) brightness(1.15);
 }
+
+.hero .hero-sub {
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    font-weight: 600;
+    color: #e6f0ff;
+    max-width: 900px;
+    margin: 0 auto 22px;
+    line-height: 1.35;
+}
