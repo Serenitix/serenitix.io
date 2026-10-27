@@ -790,3 +790,35 @@ html {
     }
 
 }
+
+/* ======================================================
+   Serenitix v1 additions (links styled as buttons, notes)
+====================================================== */
+
+a.primaryButton,
+a.secondaryButton {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.section-note {
+    text-align: center;
+    margin-top: 40px;
+    color: #c9d6e8;
+}
+
+.section-note a,
+.contact p a {
+    color: #4fd5ff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(79, 213, 255, 0.5);
+}
+
+.contact p {
+    font-size: 1.2rem;
+    color: #c9d6e8;
+}
+
+.about p + p {
+    margin-top: 16px;
+}

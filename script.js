@@ -4,45 +4,6 @@
 
 
 // ==========================================
-// Statistics Counter Animation
-// ==========================================
-
-const counters = document.querySelectorAll(".counter");
-
-function animateCounter(counter) {
-
-    const target = Number(counter.dataset.target);
-    const speed = 150;
-
-    const updateCounter = () => {
-
-        const current = Number(counter.innerText);
-        const increment = target / speed;
-
-        if (current < target) {
-
-            counter.innerText = Math.ceil(current + increment);
-
-            setTimeout(updateCounter, 15);
-
-        } else {
-
-            counter.innerText = target + "+";
-
-        }
-
-    };
-
-    updateCounter();
-
-}
-
-counters.forEach((counter) => {
-    animateCounter(counter);
-});
-
-
-// ==========================================
 // FAQ Accordion
 // ==========================================
 
@@ -223,22 +184,6 @@ primaryButtons.forEach((button) => {
 
 });
 
-
-// ==========================================
-// Contact Form Demo
-// ==========================================
-
-const contactForm = document.querySelector("form");
-
-contactForm.addEventListener("submit", (event) => {
-
-    event.preventDefault();
-
-    alert("Thank you for contacting Serenitix! We will get back to you soon.");
-
-    contactForm.reset();
-
-});
 
 // ==========================================
 // Animated Network Background
