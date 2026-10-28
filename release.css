@@ -258,3 +258,6 @@ body.R12.R10 .eris-cta.r3-R12 {
     color: #c9d6e8;
 }
 .eris-cta a { color: #4fd5ff; text-decoration: none; border-bottom: 1px solid rgba(79, 213, 255, 0.5); }
+
+/* Balance the hero across lines so no single word sits alone */
+.hero h1 { text-wrap: balance; }
