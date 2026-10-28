@@ -1,0 +1,260 @@
+/*
+Abstraction: The release-1 layout layer for serenitix.io: the round-3 design changes Nathan approved, on top of the template's style.css.
+Mechanism: Rules are keyed to static classes on <body> (R1–R13, S4) that name the approved round-3 proposals; elements added for a proposal carry .r3-add and show only when their proposal class is present. The playground that produced them lives in website/playground/round-3/ in the business seam.
+Policy: Only approved proposals ship; a change here goes through Nathan like any copy change. Unused variant rules may remain until a cleanup pass.
+Scope:
+  Self `serenitix-site/release.css: ReleaseLayout`.
+  In `style.css` (template base); `index.html` (body classes and .r3-add elements).
+  Out the release-1 look of the page.
+  Effects `none until pushed`.
+Contract: The page shows exactly the approved release-1 layout.
+  Ensures — every visible added element is gated by a proposal class present on <body>.
+*/
+
+.r3-add { display: none !important; }
+
+/* R1 — calmer background: the network stays lively in the hero, sections below sit on solid bands */
+body.R1 section:not(.hero) { position: relative; background: rgba(8, 17, 31, 0.78); }
+body.R1 section#proof,
+body.R1 section#about { background: rgba(13, 28, 52, 0.82); }
+body.R1 section:not(.hero) + section:not(.hero) { border-top: 1px solid rgba(79, 213, 255, 0.08); }
+body.R1 .about-text { background: rgba(255, 255, 255, 0.03); }
+
+/* R2 — eyebrow labels and a lead line under section headings */
+body.R2 .eyebrow.r3-R2,
+body.R6 .audiences .eyebrow { display: block !important; }
+/* R13 — no small labels: hide every eyebrow and give "Who we work with" a white heading */
+body.R13.R13 .eyebrow.r3-add,
+body.R13.R13 .audiences .eyebrow { display: none !important; }
+body.R13.R6 .audience-h2.r3-R13 { display: block !important; margin-bottom: 8px; }
+.eyebrow {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #4fd5ff;
+    margin-bottom: 12px;
+}
+body.R2 section h2 { margin-bottom: 18px; }
+body.R2 .section-lead.r3-R2 {
+    display: block !important;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 52px;
+    color: #a9b8d0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+body.R2 .about .eyebrow { text-align: left; }
+
+/* R3 — capability strip under the hero buttons; S1/S2/S3 pick the wording */
+body.R3.S1 .cap-strip.strip-S1,
+body.R3.S2 .cap-strip.strip-S2,
+body.R3.S3 .cap-strip.strip-S3,
+body.R3.S4 .cap-strip.strip-S4,
+body.R3.S5 .cap-strip.strip-S5,
+body.R3.S6 .cap-strip.strip-S6 {
+    display: flex !important;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px 36px;
+    list-style: none;
+    padding: 0;
+    margin: 56px auto 0;
+}
+.cap-strip li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #c9d6e8;
+    font-weight: 500;
+    font-size: 0.98rem;
+    letter-spacing: 0.02em;
+}
+.cap-strip i { color: #4fd5ff; font-size: 1.05rem; }
+/* S4 — one phrase: "Software" leads lowercase terms, no divider, so it reads as
+   "Software understanding, transformation, and assurance" */
+.cap-strip.phrase-strip { align-items: center; gap: 14px 26px; }
+.cap-strip .strip-lead { font-weight: 700; color: #ffffff; letter-spacing: 0.02em; margin-right: -10px; }
+@media (max-width: 560px) {
+    .cap-strip .strip-lead { flex-basis: 100%; justify-content: center; margin-right: 0; }
+    body.R3.S4 .cap-strip.phrase-strip { flex-direction: column; gap: 10px; }
+}
+/* S7 — the mission as a plain line, no icons */
+body.R3.S7 .mission-line.strip-S7 {
+    display: block !important;
+    margin: 52px auto 0;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #8fd8ff;
+    text-align: center;
+}
+
+
+
+/* R4 — service cards: left-aligned with an accent edge (numbers dropped 10-28) */
+body.R4 #services .service-card {
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    border-top: 2px solid rgba(79, 213, 255, 0.55);
+}
+body.R4 #services .service-card p { line-height: 1.6; }
+
+/* R5 — proof cards: an icon each and an "Awardable" chip */
+.service-card i.r3-add { display: none !important; }
+body.R5 #proof .service-card i.r3-R5 { display: block !important; }
+body.R5 #proof .service-card { text-align: left; }
+body.R5 .chip.r3-R5 {
+    display: inline-block !important;
+    padding: 3px 10px;
+    margin-right: 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #08111f;
+    background: #4fd5ff;
+}
+
+/* R6 — "Who we work with" band */
+body.R6 .audiences.r3-R6 { display: block !important; padding-top: 80px; padding-bottom: 80px; }
+.audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 36px;
+    max-width: 1100px;
+    margin: 28px auto 0;
+}
+.audience { text-align: left; padding-left: 18px; border-left: 2px solid rgba(79, 213, 255, 0.35); }
+.audience i { color: #4fd5ff; font-size: 1.4rem; margin-bottom: 12px; display: block; }
+.audience h3 { font-size: 1.15rem; margin-bottom: 8px; }
+.audience p { color: #a9b8d0; line-height: 1.55; font-size: 0.97rem; }
+
+/* R7 — About: a company blurb and facts in place of the founder's name, two columns on wide screens */
+body.R7 .about-name { display: none; }
+body.R7 .about-blurb.r3-R7 { display: block !important; }
+body.R7 .facts.r3-R7 {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 22px 0 0;
+}
+.facts li {
+    padding: 6px 14px;
+    border: 1px solid rgba(79, 213, 255, 0.35);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: #c9d6e8;
+}
+@media (min-width: 900px) {
+    body.R7 .about-text .facts { grid-column: 2; }
+}
+
+@media (min-width: 900px) {
+    body.R7 .about-text {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        column-gap: 48px;
+        align-items: start;
+        max-width: 1000px;
+        text-align: left;
+    }
+    body.R7 .about-text .eyebrow,
+    body.R7 .about-text h2 { grid-column: 1; }
+    body.R7 .about-text h2 { text-align: left; margin-bottom: 0; }
+    body.R7 .about-text p:not(.eyebrow) { grid-column: 2; }
+    body.R7 .about-text .about-blurb { grid-row: 1 / span 2; }
+}
+
+/* R8 — contact as a call-to-action band */
+body.R8 .contact {
+    background: linear-gradient(135deg, rgba(0, 140, 255, 0.16), rgba(79, 213, 255, 0.06)) !important;
+    border-top: 1px solid rgba(79, 213, 255, 0.2);
+    border-bottom: 1px solid rgba(79, 213, 255, 0.2);
+}
+body.R8 .contact h2 { margin-bottom: 16px; }
+body.R8 .cta-line.r3-R8 { display: block !important; font-size: 1.35rem; color: #e6eefb; margin-bottom: 28px; }
+body.R8 .cta-button.r3-R8 { display: inline-block !important; margin-bottom: 22px; }
+body.R8 .contact p:last-child { font-size: 1rem; color: #a9b8d0; }
+
+/* R9 — footer with links */
+body.R9 .footer-nav.r3-R9 {
+    display: flex !important;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-bottom: 18px;
+}
+.footer-nav a { color: #c9d6e8; text-decoration: none; font-size: 0.95rem; }
+.footer-nav a:hover { color: #4fd5ff; }
+
+
+/* R10 — ERIS as full-width solution rows with a real description (replaces the three small cards) */
+body.R10 .eris-cards { display: none; }
+body.R10 .solution-list.r3-R10 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+.solution {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 2fr;
+    gap: 28px;
+    padding: 28px 32px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-left: 3px solid #4fd5ff;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+.solution:hover { background: rgba(79, 213, 255, 0.06); border-color: rgba(79, 213, 255, 0.45); }
+.solution-head i { color: #4fd5ff; font-size: 1.5rem; margin-bottom: 10px; display: block; }
+.solution-head h3 { font-size: 1.35rem; margin-bottom: 6px; }
+.solution-tag { color: #8fa3c0; font-size: 0.95rem; line-height: 1.45; }
+.solution-body p { color: #c7d2e6; line-height: 1.65; font-size: 1.02rem; }
+.solution-meta { margin-top: 14px; font-size: 0.85rem !important; letter-spacing: 0.04em; color: #8fa3c0 !important; }
+.solution .chip {
+    display: inline-block;
+    padding: 3px 10px;
+    margin-right: 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #08111f;
+    background: #4fd5ff;
+}
+@media (max-width: 700px) {
+    .solution { grid-template-columns: 1fr; gap: 12px; padding: 22px; }
+}
+
+/* R11 — a second, concrete line on each service card */
+body.R11 .card-detail.r3-R11 {
+    display: block !important;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.92rem;
+    color: #8fa3c0 !important;
+}
+
+/* R12 — ERIS call to action under the solution rows */
+body.R12.R10 .eris-cta.r3-R12 {
+    display: block !important;
+    text-align: center;
+    max-width: 680px;
+    margin: 36px auto 0;
+    font-size: 1.08rem;
+    color: #c9d6e8;
+}
+.eris-cta a { color: #4fd5ff; text-decoration: none; border-bottom: 1px solid rgba(79, 213, 255, 0.5); }

@@ -11,12 +11,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Serenitix | Program Analysis, Transformation, and Monitoring</title>
+    <title>Serenitix | Securing the software you didn&rsquo;t write</title>
 
     <meta name="description"
         content="We take hard systems-security problems from idea to working, evaluated technology, for government programs, research groups, and industry.">
 
+    <link rel="icon" type="image/png" href="logo-mark.png">
+    <link rel="apple-touch-icon" href="logo-mark.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Serenitix">
+    <meta property="og:title" content="Serenitix | Securing the software you didn&rsquo;t write">
+    <meta property="og:description" content="Software understanding, transformation, and assurance. We take hard systems-security problems from idea to working, evaluated technology.">
+    <meta property="og:url" content="https://serenitix.io/">
+    <meta property="og:image" content="https://serenitix.io/logo-mark.png">
+    <meta name="twitter:card" content="summary">
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="release.css">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +39,7 @@
 
 </head>
 
-<body>
+<body class="R1 R2 R3 R4 R5 R6 R7 R8 R9 R10 R11 R12 R13 S4">
 
     <!-- Animated Background -->
     <canvas id="backgroundCanvas"></canvas>
@@ -50,7 +62,7 @@
 
             <a href="#home">Home</a>
             <a href="#services">What we do</a>
-            <a href="#proof">Proof</a>
+            <a href="#proof">Opportunities</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
 
@@ -71,7 +83,7 @@
 
             <h1>
 
-                Taming complexity through simplifying abstractions.
+                Securing the software you didn&rsquo;t write.
 
             </h1>
 
@@ -102,6 +114,13 @@
 
             </div>
 
+            <ul class="r3-add r3-R3 cap-strip strip-S4 phrase-strip">
+                <li class="strip-lead">Software</li>
+                <li><i class="fa-solid fa-magnifying-glass-chart"></i>understanding</li>
+                <li><i class="fa-solid fa-shuffle"></i>transformation</li>
+                <li><i class="fa-solid fa-shield-halved"></i>assurance</li>
+            </ul>
+
 
         </div>
 
@@ -114,6 +133,8 @@
     <section class="services" id="services">
 
         <h2>What we do</h2>
+
+        <p class="r3-add r3-R2 section-lead">Three ways to work with us, from a short sprint to a shared research program.</p>
 
         <div class="service-grid">
 
@@ -128,6 +149,8 @@
                     government and industry sponsors.
                 </p>
 
+                <p class="r3-add r3-R11 card-detail">Through ERIS awards, subcontracts, and BAAs.</p>
+
             </div>
 
             <div class="service-card">
@@ -141,6 +164,8 @@
                     and startup funding support.
                 </p>
 
+                <p class="r3-add r3-R11 card-detail">From a 2–6 week discovery sprint to a multi-month accelerator.</p>
+
             </div>
 
             <div class="service-card">
@@ -153,6 +178,8 @@
                     Founding affiliates fund a shared research-engineering program
                     in place of one-off consulting.
                 </p>
+
+                <p class="r3-add r3-R11 card-detail">Five to ten founders get a say in the roadmap and early access to the tools.</p>
 
             </div>
 
@@ -168,44 +195,89 @@
 
         <h2>Awardable on ERIS</h2>
 
-        <div class="service-grid">
+        <p class="r3-add r3-R2 section-lead">Three Serenitix solutions are listed as awardable on DARPA's ERIS marketplace.</p>
 
-            <div class="service-card">
+        <div class="r3-add r3-R10 solution-list">
 
-                <h3>VeriFlow</h3>
+            <article class="solution">
+                <div class="solution-head">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <h3>VeriFlow</h3>
+                    <p class="solution-tag">From bug queries to authority validation</p>
+                </div>
+                <div class="solution-body">
+                    <p>Finds code changes that quietly grant new authority, and gates the merge with a compact witness a reviewer can check.</p>
+                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 4-26-2935</p>
+                </div>
+            </article>
 
-                <p>From Bug Queries to Authority Validation</p>
+            <article class="solution">
+                <div class="solution-head">
+                    <i class="fa-solid fa-crosshairs"></i>
+                    <h3>Confine Lens</h3>
+                    <p class="solution-tag">Quantify attacker capability, not just removed functionality</p>
+                </div>
+                <div class="solution-body">
+                    <p>Measures what an attacker can still do after debloating or confinement, by tracing attacker-controlled influence to the system calls that stay reachable and the authority they carry.</p>
+                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 6-26-3289</p>
+                </div>
+            </article>
 
-                <p class="card-meta">ERIS 4-26-2935</p>
-
-            </div>
-
-            <div class="service-card">
-
-                <h3>Confine Lens</h3>
-
-                <p>Quantify Attacker Capability, Not Just Removed Functionality</p>
-
-                <p class="card-meta">ERIS 6-26-3289</p>
-
-            </div>
-
-            <div class="service-card">
-
-                <h3>TRACE</h3>
-
-                <p>Software Understanding Assurance for Autonomous Cyber Analysts</p>
-
-                <p class="card-meta">ERIS 7-26-3487</p>
-
-            </div>
+            <article class="solution">
+                <div class="solution-head">
+                    <i class="fa-solid fa-receipt"></i>
+                    <h3>TRACE</h3>
+                    <p class="solution-tag">Software understanding assurance for autonomous cyber analysts</p>
+                </div>
+                <div class="solution-body">
+                    <p>When an AI agent analyzing software reports "no findings," TRACE shows whether it actually examined and understood the code, with receipts a reviewer can check.</p>
+                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 7-26-3487</p>
+                </div>
+            </article>
 
         </div>
+
+        <p class="r3-add r3-R12 eris-cta">
+            Interested in funding one of these, or have a different direction in mind?
+            <a href="mailto:hello@serenitix.io?subject=ERIS">Email us</a>.
+        </p>
 
         <p class="section-note">
             Built on <a href="https://hyperplanes.io">Hyperplanes</a>,
             our open architecture for program analysis.
         </p>
+
+    </section>
+
+    <!-- ===========================
+         R6: Who we work with (playground proposal)
+    ============================ -->
+
+    <section class="r3-add r3-R6 audiences" id="audiences">
+
+        <h2 class="r3-add r3-R13 audience-h2">Who we work with</h2>
+
+        <div class="audience-grid">
+
+            <div class="audience">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3>Research groups</h3>
+                <p>University PIs in program analysis, binary analysis, systems security, and reverse engineering.</p>
+            </div>
+
+            <div class="audience">
+                <i class="fa-solid fa-landmark"></i>
+                <h3>Government programs</h3>
+                <p>Research programs at DARPA, ONR, AFRL, and ARPA-H, and the performers on them.</p>
+            </div>
+
+            <div class="audience">
+                <i class="fa-solid fa-industry"></i>
+                <h3>Industry teams</h3>
+                <p>Security and R&amp;D teams working on supply-chain security, reverse engineering, and hardening.</p>
+            </div>
+
+        </div>
 
     </section>
 
@@ -221,10 +293,11 @@
                 About
             </h2>
 
-            <p>
+            <p class="r3-add r3-R7 about-blurb">
 
-                Serenitix is led by Nathan Dautenhahn, a systems-security
-                researcher and engineer.
+                Serenitix is a systems-security research and engineering company.
+                We build program analysis, transformation, and monitoring tools,
+                and carry them from research results to working systems.
 
             </p>
 
@@ -235,6 +308,13 @@
                 deploy.
 
             </p>
+
+            <ul class="r3-add r3-R7 facts">
+                <li>Founded 2024</li>
+                <li>Texas</li>
+                <li>Registered in SAM.gov</li>
+                <li>3 solutions awardable on ERIS</li>
+            </ul>
 
         </div>
 
@@ -250,6 +330,10 @@
             Contact
         </h2>
 
+        <p class="r3-add r3-R8 cta-line">Have a hard systems-security problem? Tell us about it.</p>
+
+        <a class="r3-add r3-R8 primaryButton cta-button" href="mailto:hello@serenitix.io">Talk to us</a>
+
         <p>
             Email <a href="mailto:hello@serenitix.io">hello@serenitix.io</a>
         </p>
@@ -261,6 +345,14 @@
     ============================ -->
 
     <footer>
+
+        <nav class="r3-add r3-R9 footer-nav">
+            <a href="#services">What we do</a>
+            <a href="#proof">Opportunities</a>
+            <a href="#about">About</a>
+            <a href="https://hyperplanes.io">Hyperplanes</a>
+            <a href="mailto:hello@serenitix.io">hello@serenitix.io</a>
+        </nav>
 
         <p>
 
