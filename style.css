@@ -671,7 +671,7 @@ footer {
 }
 
 #menuButton {
-    display: none;
+    /* display is set by the base rule above and the mobile media query; a late display:none here hid the menu on every page (fixed 2026-11-19) */
     background: none;
     border: none;
     color: white;
