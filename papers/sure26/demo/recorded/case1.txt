@@ -1,0 +1,21 @@
+1 · Document fetch: an ownership check is deleted
+fixture OW-03 · paper §2
+
+-  if (!acl_check(user_id, doc_id)) {
+-      return NULL;
+-  }
+   return db_fetch_doc(doc_id);
+
+Before the patch: what governs the fetch?
+$ duc-proto normalize broken_access_control_safe.ll | grep 'db_fetch_doc'
+  def %doc                   <- call(@db_fetch_doc, %doc_id)    @ %is_ok
+
+What can an input reach now, unguarded, that it couldn't before?
+$ duc-proto diff broken_access_control_safe.ll broken_access_control.ll
+@get_document:
+  NEW capability paths (introduced in after):
+    + %doc_id -> %doc
+        %doc_id --[true]--> %doc
+    + %doc_id -> ret
+        %doc_id --[true]--> %doc --[true]--> ret
+

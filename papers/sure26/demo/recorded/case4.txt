@@ -1,0 +1,41 @@
+4 · Integer dispatch: the range check goes, and the integer becomes a pointer
+fixture DC-02 · paper §6.1
+
+-  if (user_val < 0 || user_val > 255)
+-      return -1;
+-  return write(1, safe_buf, (size_t)user_val);
++  volatile int *dangerous_ptr = (volatile int *)(long)user_val;
++  int leaked = *dangerous_ptr;
++  return write(1, safe_buf, (size_t)user_val + leaked);
+
+Before the patch: what governs the write?
+$ duc-proto normalize before.ll | grep 'call\(@write'
+  def %result                <- call(@write, const:1, %safe_buf, %uval)  @ %cmp_hi
+
+What can the integer reach now, unguarded?
+$ duc-proto diff before.ll after.ll
+@safe_dispatch:
+  NEW capability paths (introduced in after):
+    + %safe_buf -> %result
+        %safe_buf --[true]--> %result
+    + %safe_buf -> ret
+        %safe_buf --[true]--> %result --[true]--> ret
+    + %user_val -> %danger_ptr
+        %user_val --[true]--> %uval64 --[true]--> %danger_ptr
+    + %user_val -> %leaked
+        %user_val --[true]--> %uval64 --[true]--> %danger_ptr --[true]--> %leaked
+    + %user_val -> %result
+        %user_val --[true]--> %write_size --[true]--> %write_size64 --[true]--> %result
+        %user_val --[true]--> %uval64 --[true]--> %danger_ptr --[true]--> %leaked --[true]--> %write_size --[true]--> %write_size64 --[true]--> %result
+    + %user_val -> %uval64
+        %user_val --[true]--> %uval64
+    + %user_val -> %write_size
+        %user_val --[true]--> %write_size
+        %user_val --[true]--> %uval64 --[true]--> %danger_ptr --[true]--> %leaked --[true]--> %write_size
+    + %user_val -> %write_size64
+        %user_val --[true]--> %write_size --[true]--> %write_size64
+        %user_val --[true]--> %uval64 --[true]--> %danger_ptr --[true]--> %leaked --[true]--> %write_size --[true]--> %write_size64
+    + %user_val -> ret
+        %user_val --[true]--> %write_size --[true]--> %write_size64 --[true]--> %result --[true]--> ret
+        %user_val --[true]--> %uval64 --[true]--> %danger_ptr --[true]--> %leaked --[true]--> %write_size --[true]--> %write_size64 --[true]--> %result --[true]--> ret
+

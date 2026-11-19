@@ -1,0 +1,25 @@
+2 · Heartbeat: a length check is deleted
+fixture DC-03 · model of CVE-2014-0160 (the IR model performs the copy with write)
+
+   uint16_t payload_len = my_ntohs(req);
+-  if (req_len < 2 || (size_t)payload_len > req_len - 2)
+-      return;
+   memcpy(resp, req + 2, payload_len);
+
+Before the patch: what governs the copy?
+$ duc-proto normalize heartbleed_toy_safe.ll | grep 'call\(@write'
+  def %sent                  <- call(@write, const:1, %payload_len, %req_data)  @ %too_big
+
+What can the request reach now, unguarded?
+$ duc-proto diff heartbleed_toy_safe.ll heartbleed_toy.ll
+@heartbeat_reply:
+  NEW capability paths (introduced in after):
+    + %req -> %req_data
+        %req --[true]--> %req_data
+    + %req -> %sent
+        %req --[true]--> %req_data --[true]--> %sent
+        %req --[true]--> %pl_ptr --[true]--> %payload_len_raw --[true]--> %payload_len --[true]--> %sent
+    + %req -> ret
+        %req --[true]--> %req_data --[true]--> %sent --[true]--> ret
+        %req --[true]--> %pl_ptr --[true]--> %payload_len_raw --[true]--> %payload_len --[true]--> %sent --[true]--> ret
+

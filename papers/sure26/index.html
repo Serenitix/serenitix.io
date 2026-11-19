@@ -1,0 +1,273 @@
+<!--
+Abstraction: A talk · paper · demo landing page for "Changes in the Guard" (SURE '26).
+Mechanism: One static, self-contained HTML page with inline CSS and no scripts; it links only to
+  files in this folder (paper.pdf, viewer/index.html, demo/, assets/) and to the DOI; slides follow after the talk.
+  The abstract is transcribed from main.tex; the demo output is copied from demo/recorded/case1.txt.
+Policy: Published at serenitix.io/papers/sure26/ with Nathan's approval (2026-11-19); slides held until after the talk. Publication on the Serenitix site requires the author's explicit
+  approval of the exact files and URL (BT-PAPR-05zi). No claims beyond the paper; no private data;
+  no network fetches (no CDNs, no web fonts).
+Scope:
+  Self presentation/site/index.html: TalkLandingPage
+  In ../../main.tex, ../../main.pdf, ../changes-in-the-guard-final.pptx, ../viz/index.html, ../demo/.
+  Out this page plus the copied files beside it.
+Contract: Every link resolves to a file in this folder or to doi.org; every claim traces to the paper.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changes in the Guard · SURE '26</title>
+<meta name="description" content="Detecting authority-exposing patches with differential Guarded Flow Paths. Paper, slides, interactive viewer, and demo from SURE '26.">
+<style>
+:root {
+  --bg: #08111f; --bg2: #0b1220; --card: rgba(255,255,255,0.04); --rule: rgba(255,255,255,0.10);
+  --ink: #ffffff; --soft: #c7d2e6; --muted: #8fa0bb; --accent: #4fd5ff; --accent2: #7dd3fc;
+  --teal: #2ec4a9; --amber: #f0a24a;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(0,212,255,0.14), transparent 35%),
+    radial-gradient(circle at 85% 10%, rgba(59,130,246,0.14), transparent 35%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  background-repeat: no-repeat;
+  color: var(--ink); line-height: 1.6; overflow-x: hidden;
+}
+a { color: var(--accent); }
+a:hover { color: var(--accent2); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+.draft {
+  background: #3a2a0c; color: #ffd89a; font-size: 0.85rem; text-align: center;
+  padding: 6px 16px; border-bottom: 1px solid rgba(240,162,74,0.4);
+}
+header.hero { padding: 72px 0 40px; }
+.venue { color: var(--accent); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.82rem; }
+h1 {
+  font-size: clamp(2rem, 4.6vw, 3.2rem); font-weight: 800; line-height: 1.08; margin: 14px 0 10px;
+  background: linear-gradient(90deg, #ffffff, var(--accent2));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.subtitle { font-size: clamp(1.1rem, 2.4vw, 1.4rem); color: var(--soft); font-weight: 500; line-height: 1.35; }
+.authors { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 6px 36px; }
+.author b { display: block; font-weight: 600; }
+.author span { color: var(--muted); font-size: 0.95rem; }
+.meta { margin-top: 18px; color: var(--soft); font-size: 0.95rem; }
+.meta a { word-break: break-all; }
+.insight {
+  margin-top: 34px; padding: 22px 26px; border-left: 3px solid var(--accent);
+  background: rgba(79,213,255,0.07); border-radius: 0 12px 12px 0;
+  font-size: 1.15rem; line-height: 1.55; color: #eaf2ff;
+}
+.buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.btn {
+  display: inline-block; padding: 11px 20px; border-radius: 999px; text-decoration: none;
+  font-weight: 600; font-size: 0.95rem; color: var(--ink);
+  border: 1px solid rgba(79,213,255,0.45); background: rgba(79,213,255,0.06);
+}
+.btn:hover { background: rgba(79,213,255,0.16); color: var(--ink); }
+.btn.primary { background: linear-gradient(90deg, #0ea5e9, #22d3ee); border-color: transparent; color: #04101d; }
+.btn.primary:hover { color: #04101d; filter: brightness(1.08); }
+section { padding: 44px 0; border-top: 1px solid var(--rule); }
+h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
+h3 { font-size: 1.1rem; font-weight: 600; margin: 26px 0 8px; color: var(--accent2); }
+p { color: var(--soft); }
+p + p { margin-top: 14px; }
+.abstract p { color: #dde6f5; }
+strong { color: var(--ink); }
+ul.views { margin: 10px 0 0 20px; color: var(--soft); }
+ul.views li { margin: 6px 0; }
+kbd {
+  font-family: var(--mono); font-size: 0.85em; padding: 1px 6px; border-radius: 4px;
+  border: 1px solid var(--rule); background: rgba(255,255,255,0.06); color: var(--ink);
+}
+code { font-family: var(--mono); font-size: 0.9em; color: #e6f1ff; }
+pre {
+  font-family: var(--mono); font-size: 0.84rem; line-height: 1.5; color: #e6f1ff;
+  background: #050b15; border: 1px solid var(--rule); border-radius: 10px;
+  padding: 16px 18px; overflow-x: auto; margin-top: 12px; white-space: pre;
+}
+.cmd { margin-top: 12px; }
+.note { font-size: 0.9rem; color: var(--muted); margin-top: 10px; }
+.scope {
+  margin-top: 22px; padding: 14px 18px; border: 1px solid var(--rule); border-radius: 10px;
+  background: var(--card); font-size: 0.92rem;
+}
+.scope p { color: var(--soft); }
+figure { margin: 0; }
+figure .frame { background: #ffffff; border-radius: 10px; padding: 14px; overflow-x: auto; }
+figure img { display: block; width: 100%; height: auto; min-width: 560px; }
+figcaption { margin-top: 12px; font-size: 0.92rem; color: var(--soft); }
+.tag {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #04101d; background: var(--accent2); border-radius: 4px; padding: 1px 7px; margin-right: 6px; vertical-align: 1px;
+}
+.copyrow { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+footer { border-top: 1px solid var(--rule); padding: 34px 0 48px; margin-top: 8px; }
+.marks { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.marks .chip {
+  display: inline-flex; align-items: center; gap: 8px; background: #ffffff; border-radius: 8px;
+  padding: 5px 10px 5px 6px; color: #14232a; font-size: 0.85rem; font-weight: 600; text-decoration: none;
+}
+.marks img { height: 28px; width: auto; display: block; }
+footer p { font-size: 0.85rem; color: var(--muted); margin-top: 16px; }
+@media (max-width: 600px) {
+  .wrap { padding: 0 16px; }
+  header.hero { padding: 44px 0 30px; }
+  .insight { font-size: 1.02rem; padding: 16px 18px; }
+  .btn { padding: 10px 16px; font-size: 0.9rem; }
+  section { padding: 34px 0; }
+  pre { font-size: 0.74rem; padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="venue">SURE '26 · co-located with ACM CCS 2026 · The Hague</div>
+  <h1>Changes in the Guard</h1>
+  <div class="subtitle">Detecting Authority-Exposing Patches with Differential Guarded Flow Paths</div>
+
+  <div class="authors">
+    <div class="author"><b>Nathan Dautenhahn</b><span>Dartmouth College and Serenitix</span></div>
+    <div class="author"><b>Sergey Bratus</b><span>Dartmouth College</span></div>
+  </div>
+
+  <div class="meta">
+    2nd Workshop on Software Understanding and Reverse Engineering (SURE '26), The Hague, Netherlands.
+    Talk: November 19, 2026.<br>
+    DOI: <a href="https://doi.org/10.1145/3847158.3847387">10.1145/3847158.3847387</a>
+  </div>
+
+  <p class="insight">Bugs are a lack of program-level sanitization. If every value flow carries the check that guards it, a patch that removes a check becomes a visible difference between two graphs, with a witness path.</p>
+
+  <nav class="buttons" aria-label="Materials">
+    <a class="btn primary" href="paper.pdf">Paper (PDF)</a>
+    <span class="btn" style="opacity:0.55;cursor:default" title="Slides will be posted after the talk">Slides (after the talk)</span>
+    <a class="btn" href="viewer/index.html">Interactive viewer</a>
+    <a class="btn" href="#try">Demo</a>
+    <a class="btn" href="#bibtex">BibTeX</a>
+  </nav>
+</header>
+
+<section class="abstract" id="abstract">
+  <h2>Abstract</h2>
+  <p>Software changes constantly, and patches keep introducing vulnerabilities. Many of them have one shape: a patch removes or weakens a check, and an attacker gains authority that was previously out of reach. The question an analyst asks of such a diff is not &ldquo;is there a bug?&rdquo; but &ldquo;what can I <em>do</em> now that I could not before, and along which path?&rdquo; Bug detectors match shapes in one version; taint trackers report that data reaches a sensitive operation but keep the check beside the query, not in the program. Neither can name the check a patch removed.</p>
+  <p>We introduce <strong>Guarded Flow Paths (GFP)</strong>, in which every value flow carries the branch conditions under which it happens, so a check is a label on the path from an input to the operation that uses it. A checker names a source, a sensitive operation, and the condition under which that operation becomes a violation: the same integer may select an address, a write length, or a record, and the operand it reaches says which. One reachability query answers every checker. <em>Differential authority analysis</em> runs that query on both sides of a patch and reports the authority gained or lost: which sensitive operations an input can now reach, and which guard protected each path before. Our intra-procedural prototype, AuthDiff, lifts LLVM IR into GFP; on a worked example it reports nine newly unconditioned source/endpoint pairs with thirteen witness paths, and seventeen written checkers span CWE and OWASP classes on synthetic examples and one OpenSSL excerpt.</p>
+</section>
+
+<section id="figure">
+  <h2>What the difference looks like</h2>
+  <figure>
+    <div class="frame">
+      <img src="assets/viz-diff-docfetch.png" width="1414" height="230"
+           alt="Differential view for the document-fetch fixture: the path from the document id to the database fetch and the return was guarded by is_ok before the patch and is unconditioned (at true) after it; the access-check chain is greyed out.">
+    </div>
+    <figcaption>
+      <span class="tag">Tool output</span>
+      Differential view from the interactive viewer, drawn from the prototype's <code>diff</code> output on the
+      document-fetch fixture (a synthetic minimal LLVM-IR model). Before the patch, the fetch and the return were
+      guarded by <code>@ %is_ok</code> (struck through); after it they hold <code>@ true</code>. The orange edges
+      are the newly unguarded witness path from <code>%doc_id</code>; the grey chain is the deleted access check.
+    </figcaption>
+  </figure>
+</section>
+
+<section id="try">
+  <h2>Try it</h2>
+
+  <h3>Interactive viewer</h3>
+  <p>The <a href="viewer/index.html">viewer</a> is one self-contained HTML file that works offline. It draws only
+  parsed prototype output for the talk's fixtures, in three views:</p>
+  <ul class="views">
+    <li><kbd>1</kbd> <strong>GFP</strong>: the Guarded Flow Paths of one version (before or after; <kbd>b</kbd>/<kbd>a</kbd>), every edge labelled with the condition it runs under.</li>
+    <li><kbd>2</kbd> <strong>Spec</strong>: a written checker specification (source, sensitive operation, violation condition). The view shows the specification; it does not evaluate it.</li>
+    <li><kbd>3</kbd> <strong>Differential</strong>: the source/endpoint pairs that are newly unguarded after the patch, with their witness paths.</li>
+  </ul>
+  <table class="keys" style="border-collapse:collapse;margin:0.6rem 0 0.4rem;font-size:0.95rem">
+    <caption style="text-align:left;font-weight:600;padding-bottom:0.3rem">Viewer keys</caption>
+    <tr><td style="padding:2px 12px 2px 0"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></td><td>switch view: graph · spec · differential</td></tr>
+    <tr><td style="padding:2px 12px 2px 0"><kbd>b</kbd> / <kbd>a</kbd></td><td>graph view: before / after the patch</td></tr>
+    <tr><td style="padding:2px 12px 2px 0"><kbd>f</kbd></td><td>next example (heartbeat model ↔ document fetch)</td></tr>
+    <tr><td style="padding:2px 12px 2px 0"><kbd>w</kbd></td><td>differential view: highlight the next witness path (or click a witness line)</td></tr>
+  </table>
+  <p class="note">Open the viewer, then use the keys. Laid out for a desktop-size screen.</p>
+
+  <h3>Demo</h3>
+  <p>One command compares the two sides of a patch:</p>
+  <pre class="cmd">duc-proto diff before.ll after.ll</pre>
+  <p>Recorded output of case 1 (document fetch: an ownership check is deleted), verbatim:</p>
+<pre>1 · Document fetch: an ownership check is deleted
+fixture OW-03 · paper §2
+
+-  if (!acl_check(user_id, doc_id)) {
+-      return NULL;
+-  }
+   return db_fetch_doc(doc_id);
+
+Before the patch: what governs the fetch?
+$ duc-proto normalize broken_access_control_safe.ll | grep 'db_fetch_doc'
+  def %doc                   &lt;- call(@db_fetch_doc, %doc_id)    @ %is_ok
+
+What can an input reach now, unguarded, that it couldn't before?
+$ duc-proto diff broken_access_control_safe.ll broken_access_control.ll
+@get_document:
+  NEW capability paths (introduced in after):
+    + %doc_id -&gt; %doc
+        %doc_id --[true]--&gt; %doc
+    + %doc_id -&gt; ret
+        %doc_id --[true]--&gt; %doc --[true]--&gt; ret
+</pre>
+  <p class="note">All four recorded cases: <a href="demo/recorded/case1.txt">1 document fetch</a> ·
+  <a href="demo/recorded/case2.txt">2 heartbeat</a> · <a href="demo/recorded/case3.txt">3 ping endpoint</a> ·
+  <a href="demo/recorded/case4.txt">4 integer dispatch</a>. The live script, <a href="demo/run-demo.sh">run-demo.sh</a>,
+  needs the DUC v2 prototype binary (<code>duc-proto</code>) and its test fixtures, located by <code>DUC_ROOT</code>;
+  without them, read the recorded outputs.</p>
+
+  <div class="scope">
+    <p><strong>Scope.</strong> The prototype is intra-procedural. The examples are mostly synthetic minimal
+    LLVM-IR models patterned on real vulnerabilities, plus one real OpenSSL function. The checker specifications
+    are written; their automatic evaluation is planned.</p>
+  </div>
+</section>
+
+<section id="bibtex">
+  <h2>BibTeX</h2>
+<pre>@inproceedings{dautenhahn2026changes,
+  author    = {Dautenhahn, Nathan and Bratus, Sergey},
+  title     = {Changes in the Guard: Detecting Authority-Exposing Patches
+               with Differential Guarded Flow Paths},
+  booktitle = {2nd Workshop on Software Understanding and Reverse
+               Engineering (SURE '26)},
+  year      = {2026},
+  month     = nov,
+  address   = {The Hague, Netherlands},
+  publisher = {ACM},
+  isbn      = {979-8-4007-3019-1},
+  doi       = {10.1145/3847158.3847387},
+  url       = {https://doi.org/10.1145/3847158.3847387}
+}</pre>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="marks">
+      <span class="chip"><img src="assets/logo-serenitix.png" alt="">Serenitix</span>
+      <span class="chip"><img src="assets/logo-dartmouth-pine.png" alt="">Dartmouth College</span>
+    </div>
+    <p>The paper is published under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.
+    © 2026 Copyright held by the owner/author(s).</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+3 · Ping endpoint: hostname validation is deleted
+fixture OW-02 · command injection
+
+-  int ok = validate_hostname(host);
+-  if (!ok) return -1;
+   const char *cmd = build_ping_cmd(host);
+   return system(cmd);
+
+Before the patch: what governs the shell command?
+$ duc-proto normalize cmd_injection_safe.ll | grep 'build_ping_cmd|@system'
+  def %cmd                   <- call(@build_ping_cmd, %host)    @ %is_bad
+  def %ret                   <- call(@system, %cmd)             @ %is_bad
+
+What can the hostname reach now, unguarded?
+$ duc-proto diff cmd_injection_safe.ll cmd_injection.ll
+@run_ping:
+  NEW capability paths (introduced in after):
+    + %host -> %cmd
+        %host --[true]--> %cmd
+    + %host -> %ret
+        %host --[true]--> %cmd --[true]--> %ret
+    + %host -> ret
+        %host --[true]--> %cmd --[true]--> %ret --[true]--> ret
+
