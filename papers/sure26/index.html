@@ -178,6 +178,19 @@ footer p { font-size: 0.85rem; color: var(--muted); margin-top: 16px; }
       are the newly unguarded witness path from <code>%doc_id</code>; the grey chain is the deleted access check.
     </figcaption>
   </figure>
+  <figure>
+    <div class="frame">
+      <img src="assets/viz-diff-dc02-write.png" width="1587" height="320" alt="Integer example, witness 1: the caller's integer reaches the write call; the guard on the write changed from cmp_hi to true.">
+      <img src="assets/viz-diff-dc02-load.png" width="1587" height="320" alt="Integer example, witness 2: the same integer is cast to a pointer and loaded from, a new unguarded path.">
+    </div>
+    <figcaption>
+      <span class="tag">Tool output</span>
+      One removed guard, two kinds of new reach. On the integer fixture (DC-02, a synthetic minimal LLVM-IR model), a patch
+      removes a 0&ndash;255 range check. The same diff reports (1) the write length now unguarded (<code>@ %cmp_hi</code> &rarr;
+      <code>@ true</code>) and (2) the integer now used as an address and loaded from. Thick orange is the witness path for each.
+      9 new unguarded pairs, 13 witness paths; graph paths, not nine bugs.
+    </figcaption>
+  </figure>
 </section>
 
 <section id="try">
@@ -195,7 +208,7 @@ footer p { font-size: 0.85rem; color: var(--muted); margin-top: 16px; }
     <caption style="text-align:left;font-weight:600;padding-bottom:0.3rem">Viewer keys</caption>
     <tr><td style="padding:2px 12px 2px 0"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></td><td>switch view: graph · spec · differential</td></tr>
     <tr><td style="padding:2px 12px 2px 0"><kbd>b</kbd> / <kbd>a</kbd></td><td>graph view: before / after the patch</td></tr>
-    <tr><td style="padding:2px 12px 2px 0"><kbd>f</kbd></td><td>next example (heartbeat model ↔ document fetch)</td></tr>
+    <tr><td style="padding:2px 12px 2px 0"><kbd>f</kbd></td><td>next example (heartbeat model → document fetch → integer dispatch)</td></tr>
     <tr><td style="padding:2px 12px 2px 0"><kbd>w</kbd></td><td>differential view: highlight the next witness path (or click a witness line)</td></tr>
   </table>
   <p class="note">Open the viewer, then use the keys. Laid out for a desktop-size screen.</p>
