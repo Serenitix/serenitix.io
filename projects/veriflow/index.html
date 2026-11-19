@@ -249,6 +249,8 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
         border: 1.5px solid #f2b866; color: #f2b866; background: rgba(242,184,102,.08);
         font-size: .78rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
     }
+    body.paper-page .hero img.eris-badge { display:block; width:220px; height:220px; margin: -20px auto -6px; }
+    body.paper-page .hero p.eris-statement { font-size: 1.15rem; font-weight: 400; line-height: 1.6; color: #c7d2e6; max-width: 820px; margin: 0 auto 26px; }
     .proj-card { padding: 26px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
     .proj-card h3 { margin: 6px 0 6px; } .proj-card h3 a { color:#fff; text-decoration:none; border-bottom:none; }
     .proj-card .proj-title { color:#a9b8d0; font-size:.98rem; margin:0 0 10px; }
@@ -296,7 +298,7 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
     <section class="hero" id="home">
         <div class="hero-content">
             <p class="paper-venue">DARPA ERIS · Listing 4-26-2935</p>
-            <p class="award-badge">Awardable</p>
+            <img class="eris-badge" src="../eris-awardable-badge.png" alt="ERIS Marketplace Awardable badge">
             <h1>VeriFlow</h1>
             <p class="hero-sub">From Bug Queries to Authority Validation</p>
             <p class="paper-meta">Serenitix · <a href="../../#contact">Contact us about this listing</a></p>
@@ -321,17 +323,17 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
 
             <h3><i class="fa-solid fa-cubes"></i>What exists today</h3>
             <ul class="paper-views">
+                <li>A working Rust prototype that performs DUC normalization, differential flow-graph construction, and capability comparison. Its output is shown in the interactive viewer and the recorded terminal demo on the <a href="../../papers/sure26/">SURE '26 paper page</a>.</li>
                 <li>A peer-reviewed paper, <a href="../../papers/sure26/">Changes in the Guard</a> (SURE '26, co-located with ACM CCS 2026), that defines Guarded Flow Paths and differential authority analysis.</li>
-                <li>A research prototype, AuthDiff, that lifts LLVM IR into Guarded Flow Paths within a single function and reports newly unguarded source-to-operation pairs with witness paths. On the paper's worked example it reports nine newly unguarded pairs with thirteen witness paths.</li>
+                <li>The paper's analysis, AuthDiff, lifts LLVM IR into Guarded Flow Paths within a single function and reports newly unguarded source-to-operation pairs with witness paths. On the paper's worked example it reports nine newly unguarded pairs with thirteen witness paths.</li>
                 <li>Seventeen written checkers spanning CWE and OWASP classes, each expressed in the same source, operation, and condition form, demonstrated on synthetic examples and one OpenSSL excerpt.</li>
-                <li>A public interactive viewer and a recorded terminal demo, linked from the paper page.</li>
             </ul>
-            <p class="paper-note">The prototype is research evidence on small examples. It is not yet a production tool.</p>
+            <p class="paper-note">This is research evidence on small examples. It is not yet a production tool.</p>
 
             <h3><i class="fa-solid fa-road"></i>What an award delivers</h3>
             <p>The planned work moves VeriFlow from prototype evidence to a control a software factory can run. All of the following is planned, not yet demonstrated:</p>
             <ul class="paper-views">
-                <li><strong>Bounded authority-regression classes.</strong> A small set of high-value classes, such as removed authorization guards, length misuse, and untrusted integers used as pointers, validated end to end instead of a general-purpose analysis platform.</li>
+                <li><strong>Bounded authority-regression classes.</strong> A small set of high-value classes, such as removed authorization guards, length misuse, and untrusted integers used as pointers, each validated end to end.</li>
                 <li><strong>Compact witnesses.</strong> Short, readable evidence for each finding: the source, the privileged operation, and the guard that used to sit between them.</li>
                 <li><strong>A CI/CD merge gate.</strong> A machine-usable decision on each change (block, allow, or justify) that fits existing pipelines.</li>
                 <li><strong>Validating AI-generated patches.</strong> The same before-and-after check is a natural fit for patches written by AI coding agents: it asks one question of every change, and it returns a witness rather than a judgment call. We plan to evaluate VeriFlow as a fast first-pass gate for agent-generated changes, so human review can focus on the ones that change authority.</li>
@@ -340,7 +342,13 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
             <h3><i class="fa-solid fa-book"></i>Related work</h3>
             <p>Nathan Dautenhahn and Sergey Bratus, <a href="../../papers/sure26/">Changes in the Guard: Detecting Authority-Exposing Patches with Differential Guarded Flow Paths</a>. 2nd Workshop on Software Understanding and Reverse Engineering (SURE '26), The Hague, 2026. DOI: <a href="https://doi.org/10.1145/3847158.3847387">10.1145/3847158.3847387</a>. The paper page includes the PDF, slides, the interactive viewer, and the demo.</p>
 
-            <div class="paper-scope"><p><strong>How to engage.</strong> VeriFlow is available through DARPA ERIS as an Awardable listing (4-26-2935). Awardable is a determination, not an award. If you run a software factory, a mission-system pipeline, or a program evaluating AI-generated code and want to discuss this listing, <a href="../../#contact">contact Serenitix</a>.</p></div>
+            <h3><i class="fa-solid fa-users"></i>Team</h3>
+            <ul class="paper-views">
+                <li><a href="https://nathandautenhahn.com">Nathan Dautenhahn</a>, CEO of Serenitix and lead for this listing: OS security, privilege decomposition, and LLVM-based program analysis.</li>
+                <li><a href="https://faculty-directory.dartmouth.edu/sergey-bratus">Sergey Bratus</a>: LangSec, weird machines, binary semantics, and reasoning about authority boundaries.</li>
+            </ul>
+
+            <div class="paper-scope"><p><strong>How to engage.</strong> Our solution has been competitively assessed by the Defense Advanced Research Projects Agency (DARPA) and has been deemed &ldquo;awardable&rdquo; in the Expedited Research Innovation System (ERIS) Marketplace, making it available to view and easily procurable by the Department of War. Government users can find it by searching the exact title, &ldquo;VeriFlow: From Bug Queries to Authority Validation,&rdquo; in the ERIS Marketplace at <a href="https://darpaconnect.us/eris">darpaconnect.us/eris</a> (listing 4-26-2935). If you run a software factory, a mission-system pipeline, or a program evaluating AI-generated code and want to discuss this listing, <a href="../../#contact">contact Serenitix</a>.</p></div>
         </div>
     </section>
 

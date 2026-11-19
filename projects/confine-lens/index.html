@@ -19,7 +19,7 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
     <title>Confine Lens · DARPA ERIS Awardable | Serenitix</title>
 
     <meta name="description"
-        content="Confine Lens measures the attacker capability left after container hardening, not just what was removed. Awardable through DARPA ERIS, listing 6-26-3289.">
+        content="Confine Lens measures the attacker capability left after container hardening, not just what was removed. Awardable in the DARPA ERIS Marketplace, 6-26-3289.">
 
     <link rel="icon" type="image/png" href="../../logo-mark.png">
     <link rel="apple-touch-icon" href="../../logo-mark.png">
@@ -27,7 +27,7 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Serenitix">
     <meta property="og:title" content="Confine Lens · DARPA ERIS Awardable">
-    <meta property="og:description" content="Confine Lens measures the attacker capability left after container hardening, not just what was removed. Awardable through DARPA ERIS, listing 6-26-3289.">
+    <meta property="og:description" content="Confine Lens measures the attacker capability left after container hardening, not just what was removed. Awardable in the DARPA ERIS Marketplace, 6-26-3289.">
     <meta property="og:url" content="https://serenitix.io/projects/confine-lens/">
     <meta property="og:image" content="https://serenitix.io/logo-mark.png">
     <meta name="twitter:card" content="summary">
@@ -249,6 +249,8 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
         border: 1.5px solid #f2b866; color: #f2b866; background: rgba(242,184,102,.08);
         font-size: .78rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
     }
+    body.paper-page .hero img.eris-badge { display:block; width:220px; height:220px; margin: -20px auto -6px; }
+    body.paper-page .hero p.eris-statement { font-size: 1.15rem; font-weight: 400; line-height: 1.6; color: #c7d2e6; max-width: 820px; margin: 0 auto 26px; }
     .proj-card { padding: 26px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
     .proj-card h3 { margin: 6px 0 6px; } .proj-card h3 a { color:#fff; text-decoration:none; border-bottom:none; }
     .proj-card .proj-title { color:#a9b8d0; font-size:.98rem; margin:0 0 10px; }
@@ -296,7 +298,7 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
     <section class="hero" id="home">
         <div class="hero-content">
             <p class="paper-venue">DARPA ERIS · Listing 6-26-3289</p>
-            <p class="award-badge">Awardable</p>
+            <img class="eris-badge" src="../eris-awardable-badge.png" alt="ERIS Marketplace Awardable badge">
             <h1>Confine Lens</h1>
             <p class="hero-sub">Quantify Attacker Capability, Not Just Removed Functionality</p>
             <p class="paper-meta">Serenitix · <a href="../../#contact">Contact us about this listing</a></p>
@@ -306,45 +308,51 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
     <section id="overview">
         <div class="paper-col note-body">
             <h3><i class="fa-solid fa-triangle-exclamation"></i>The problem</h3>
-            <p>Container hardening tools reduce things: packages, files, image size, functions, syscalls, policy permissions. Those reductions are useful engineering signals. They do not answer the operational security question: what can an attacker still do after hardening?</p>
-            <p>Current practice relies on reduction counts, manual review, or analysis of one policy in isolation. A report that a seccomp profile blocked most syscalls says nothing about whether the few that remain are the ones an exploit needs. A policy can remove many low-impact syscalls and keep the high-authority ones; another can remove fewer and eliminate process-control or network authority. Counting cannot tell them apart.</p>
+            <p>Container hardening tools reduce things: packages, files, image size, functions, syscalls, policy permissions. Those reductions are useful engineering signals. They do not answer the operational security question: what attacker capability remains after hardening?</p>
+            <p>Current practice relies on reduction counts, manual review, or isolated policy analysis. A report that a policy blocked a number of syscalls says little about whether exploit-relevant authority went away. One policy can remove many low-impact syscalls and leave a few high-authority interfaces; another can remove fewer syscalls and eliminate process-control or network authority. Counting cannot tell them apart.</p>
 
             <h3><i class="fa-solid fa-lightbulb"></i>The approach</h3>
-            <p>Confine Lens evaluates confinement by the capability it takes away from the attacker. The model has two levels:</p>
+            <p>Confine Lens evaluates confinement by the capability it removes from the attacker. The model separates a local unit from the end-to-end outcome:</p>
             <ul class="paper-views">
-                <li><strong>Interface authority</strong> is the local unit: the authority a syscall or system interface conveys when attacker-controlled data can reach it.</li>
-                <li><strong>Attacker capability</strong> is the end-to-end outcome: the transitive closure of attacker-controlled influence paths, the syscall interfaces those paths reach, and the interface authority those syscalls convey.</li>
+                <li><strong>Interface authority</strong> is the local unit: the authority represented by a syscall or system interface that attacker-controlled data can reach.</li>
+                <li><strong>Attacker capability</strong> is the end-to-end outcome: the transitive closure of attacker-tainted paths, the syscall interfaces those taints reach, and the interface authority those syscalls convey.</li>
             </ul>
-            <p>Confine Lens compares an unconfined baseline against a confined or debloated version of the same container. It identifies attacker-facing interfaces, traces attacker-controlled influence through the program, resolves which syscall authority is still reachable, and aggregates the result. The output is a differential report: which authority confinement revoked, what capability remains, and which interfaces drive the remaining risk. Syscall counts become an input, not the claim.</p>
-            <p>The approach complements existing reducers such as Confine (static syscall-policy generation), minimal images, and debloaters by measuring the security consequence of their output.</p>
+            <p>Confine Lens compares an unconfined baseline against a confined or hardened version of the same container. It identifies attacker-facing interfaces, traces attacker-controlled influence, resolves reachable syscall authority, and aggregates the resulting attacker capability. The output is a before/after report: which authority confinement revoked, what capability remains, and which interfaces drive the remaining risk. Instead of "this policy removed 70 percent of syscalls," the report says which attacker authority changed.</p>
+            <p>Confine Lens complements debloating, minimal images, syscall policies, and verification tools. It measures the security consequence of their output.</p>
 
             <figure class="paper-figure">
                 <div class="frame"><img src="attacker-capability-model.png" alt="Six-stage diagram: attacker input, application entry points, influence graph with guarded and unguarded paths, syscall interface, memory dereference paths, and authority reached. Exposure times capability equals risk."></div>
-                <figcaption>The measurement model from the submission brief. Exposure asks whether attacker input can reach and influence a syscall-facing interface; capability asks what authority becomes reachable through it. Paths are classed as guarded, conditioned, or unguarded.</figcaption>
+                <figcaption>The measurement model from the submitted pitch slides. Exposure asks whether attacker input can reach and influence a syscall-facing interface; capability asks what authority becomes reachable through it. Paths are classed as guarded, conditioned, or unguarded.</figcaption>
             </figure>
 
             <h3><i class="fa-solid fa-cubes"></i>What exists today</h3>
             <ul class="paper-views">
-                <li>LLVM-pass prototyping: an LLVM-based taint analysis that follows data from annotated sources to syscall sinks, with Confine Lens examples built against it.</li>
-                <li>An early prototype pipeline that enumerates binaries in a container image and scores Confine-generated seccomp policies per binary. Its scoring is static, not yet influence-based.</li>
-                <li>A technical architecture covering the policy runner, artifact normalizer, interface exposure analysis, memory dereference path analysis, authority scoring, and differential reporting.</li>
-                <li>The interface-analysis and authority-labeling research behind it (see Related work).</li>
+                <li>An LLVM-pass taint analysis that follows data from annotated sources to syscall sinks, with Confine Lens examples built against it.</li>
+                <li>An early prototype that scores Confine-generated seccomp policies per binary in a container image.</li>
+                <li>An existing tool that scores at kernel level. It needs modest modification for this use.</li>
+                <li>The Confine Lens architecture, figures, and a prototype authority-delta demonstration.</li>
+                <li>The interface-analysis and privilege-analysis research behind it (see Related work).</li>
             </ul>
 
             <h3><i class="fa-solid fa-road"></i>What an award delivers</h3>
             <p>Planned work, not yet built:</p>
             <ul class="paper-views">
-                <li>Re-basing the analysis on Serenitix's def-use influence analysis (DUC) and a program capability graph, replacing static scoring with influence-based reachability.</li>
-                <li>A staged measurement ladder that is useful at each step: syscall removed, capability class removed, binary-level authority reduced, interface-reachable authority reduced, memory-dereference exposure reduced, unguarded exploitable path removed.</li>
-                <li>Policy-to-authority delta reports for a baseline and a confinement policy.</li>
-                <li>Guarded and unguarded path analysis from attacker-influenced data to dangerous memory operations.</li>
-                <li>Repeatable scoring, policy comparison, and CI/CD gating for deployment decisions.</li>
+                <li>Re-basing the analysis on Hyperplanes, Serenitix's analysis foundation: DUC def-use influence analysis and a program capability graph.</li>
+                <li>Policy-to-authority delta reporting: given a baseline and a confinement policy, report what interface authority remains.</li>
+                <li>Interface exposure and memory dereference path analysis: which paths are attacker-influenced, guarded or unguarded, and connected to dangerous operations.</li>
+                <li>An operational tool: repeatable scoring, dashboards, CI/CD integration, and policy comparison for deployment decisions.</li>
             </ul>
 
             <h3><i class="fa-solid fa-book"></i>Related work</h3>
-            <p>Confine Lens builds on two published lines of research by Serenitix founder Nathan Dautenhahn. <a href="http://nathandautenhahn.com/downloads/publications/chien-civscope-kisv23.pdf">CIVScope</a> (KISV 2023) measures exploitability across compartment interfaces and supplies the guarded-path view of interface vulnerability. The <a href="http://nathandautenhahn.com/downloads/publications/object-encaps-langsec23.pdf">Object-Encapsulation Model</a> (LangSec 2023) provides whole-program privilege analysis and the syscall sensitivity labeling that informs how Confine Lens weights authority. For a related Serenitix listing on authority regressions in CI/CD, see the <a href="../../papers/sure26/">SURE paper page</a>.</p>
+            <p>Confine Lens builds on published research by Serenitix founder Nathan Dautenhahn. <a href="http://nathandautenhahn.com/downloads/publications/chien-civscope-kisv23.pdf">CIVScope</a> (KISV 2023) provides the foundation for interface vulnerability and guarded-path analysis. The <a href="http://nathandautenhahn.com/downloads/publications/object-encaps-langsec23.pdf">Object-Encapsulation Model</a> (LangSec 2023), a whole-program privilege and compartmentalization analysis, informs the privilege and syscall-sensitivity framing. For a related Serenitix listing on authority regressions in CI/CD, see the <a href="../../papers/sure26/">SURE paper page</a>.</p>
 
-            <div class="paper-scope"><p><strong>How to engage.</strong> Confine Lens is available through DARPA ERIS as an Awardable listing (listing 6-26-3289). Awardable is a determination that the listing is eligible for award through ERIS; it is not an award. Government programs can pursue it through the ERIS marketplace. Operators who need to compare hardening choices by measured security impact can <a href="../../#contact">contact Serenitix</a>.</p></div>
+            <h3><i class="fa-solid fa-users"></i>Team</h3>
+            <ul class="paper-views">
+                <li><a href="https://nathandautenhahn.com">Nathan Dautenhahn</a>, lead: operating-system security, privilege decomposition, LLVM-based analysis, compartment interfaces, and influence reasoning.</li>
+                <li><a href="https://faculty-directory.dartmouth.edu/sergey-bratus">Sergey Bratus</a>: LangSec, weird machines, binary semantics, and exploitation-relevant reasoning about authority boundaries.</li>
+            </ul>
+
+            <div class="paper-scope"><p><strong>How to engage.</strong> Our solution has been competitively assessed by the Defense Advanced Research Projects Agency (DARPA) and has been deemed &ldquo;awardable&rdquo; in the Expedited Research Innovation System (ERIS) Marketplace, making it available to view and easily procurable by the Department of War. Government users can find it by searching the exact title, &ldquo;Confine Lens: Quantify Attacker Capability, Not Just Removed Functionality,&rdquo; in the ERIS Marketplace at <a href="https://darpaconnect.us/eris">darpaconnect.us/eris</a>. To discuss the listing, <a href="../../#contact">contact Serenitix</a>.</p></div>
         </div>
     </section>
 
