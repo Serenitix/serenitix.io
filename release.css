@@ -293,3 +293,8 @@ body.R12.R10 .eris-cta.r3-R12 {
 .solution-head h3 a:hover { color: #4fd5ff; }
 .solution-meta a { color: #4fd5ff; text-decoration: none; text-transform: none; }
 @media (max-width: 700px) { .eris-strip { font-size: 0.9rem; padding-right: 14px; } .eris-strip img { width: 44px; height: 44px; } }
+
+/* One content width for the home sections: Work with us, Opportunities (banner + rows), Who we work with (1100px, centered) */
+.service-grid,
+#proof .eris-banner,
+body.R10 .solution-list.r3-R10 { max-width: 1100px; margin-left: auto; margin-right: auto; }
