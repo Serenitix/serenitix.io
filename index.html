@@ -14,7 +14,7 @@
     <title>Serenitix | Securing the software you didn&rsquo;t write</title>
 
     <meta name="description"
-        content="We take hard systems-security problems from idea to working, evaluated technology, for government programs, research groups, and industry.">
+        content="Analysis tools that show what software can actually do, carried from research to working systems. Three solutions Awardable in the DARPA ERIS Marketplace.">
 
     <link rel="icon" type="image/png" href="logo-mark.png">
     <link rel="apple-touch-icon" href="logo-mark.png">
@@ -28,7 +28,7 @@
     <meta name="twitter:card" content="summary">
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="release.css?v=2">
+    <link rel="stylesheet" href="release.css?v=3">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,8 +61,8 @@
         <nav>
 
             <a href="#home">Home</a>
-            <a href="#services">What we do</a>
-            <a href="#proof">Opportunities</a>
+            <a href="#services">Work with us</a>
+            <a href="#proof">Solutions</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
 
@@ -90,9 +90,10 @@
 
             <p class="hero-sub">
 
-                We take hard systems-security problems from idea to working,
-                evaluated technology, for government programs, research groups,
-                and industry.
+                We build analysis tools that show what software can actually do:
+                what a patch newly exposes, what an attacker can still reach, and
+                what an AI analyst really examined. Then we carry them from research
+                to working systems for government programs, research groups, and industry.
 
             </p>
 
@@ -106,13 +107,18 @@
                 </a>
 
 
-                <a class="secondaryButton" href="#services">
+                <a class="secondaryButton" href="#proof">
 
-                    What we do
+                    Our solutions
 
                 </a>
 
             </div>
+
+            <a class="eris-strip" href="projects/eris/">
+                <img src="projects/eris/eris-awardable-badge.png" alt="ERIS Marketplace Awardable badge">
+                <span><b>3 solutions Awardable</b> in the DARPA ERIS Marketplace <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
 
             <ul class="r3-add r3-R3 cap-strip strip-S4 phrase-strip">
                 <li class="strip-lead">Software</li>
@@ -132,9 +138,9 @@
 
     <section class="services" id="services">
 
-        <h2>What we do</h2>
+        <h2>Work with us</h2>
 
-        <p class="r3-add r3-R2 section-lead">Three ways to work with us, from a short sprint to a shared research program.</p>
+        <p class="r3-add r3-R2 section-lead">Three ways in, from a short sprint to a shared research program.</p>
 
         <div class="service-grid">
 
@@ -193,58 +199,63 @@
 
     <section class="services" id="proof">
 
-        <h2>Awardable on ERIS</h2>
+        <img class="eris-badge-home" src="projects/eris/eris-awardable-badge.png" alt="ERIS Marketplace Awardable badge">
 
-        <p class="r3-add r3-R2 section-lead">Three Serenitix solutions are listed as awardable on DARPA's ERIS marketplace.</p>
+        <h2>Awardable on DARPA ERIS</h2>
+
+        <p class="r3-add r3-R2 section-lead">Three Serenitix solutions have each been competitively assessed by the Defense Advanced Research Projects Agency (DARPA) and deemed &ldquo;awardable&rdquo; in the Expedited Research Innovation System (ERIS) Marketplace, making them available to view and easily procurable by the Department of War.</p>
 
         <div class="r3-add r3-R10 solution-list">
 
             <article class="solution">
                 <div class="solution-head">
-                    <i class="fa-solid fa-diagram-project"></i>
-                    <h3>VeriFlow</h3>
+                    <a class="solution-thumb" href="projects/eris/veriflow/"><img src="projects/eris/veriflow/thumb.jpg" alt=""></a>
+                    <h3><a href="projects/eris/veriflow/">VeriFlow</a></h3>
                     <p class="solution-tag">From bug queries to authority validation</p>
                 </div>
                 <div class="solution-body">
-                    <p>Finds code changes that quietly grant new authority, and gates the merge with a compact witness a reviewer can check.</p>
-                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 4-26-2935</p>
+                    <p>Finds code changes that quietly grant new authority, including in AI-generated patches, and gates the merge with a compact witness a reviewer can check.</p>
+                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 4-26-2935 · <a href="projects/eris/veriflow/">Details</a></p>
                 </div>
             </article>
 
             <article class="solution">
                 <div class="solution-head">
-                    <i class="fa-solid fa-crosshairs"></i>
-                    <h3>Confine Lens</h3>
+                    <a class="solution-thumb" href="projects/eris/confine-lens/"><img src="projects/eris/confine-lens/thumb.jpg" alt=""></a>
+                    <h3><a href="projects/eris/confine-lens/">Confine Lens</a></h3>
                     <p class="solution-tag">Quantify attacker capability, not just removed functionality</p>
                 </div>
                 <div class="solution-body">
                     <p>Measures what an attacker can still do after debloating or confinement, by tracing attacker-controlled influence to the system calls that stay reachable and the authority they carry.</p>
-                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 6-26-3289</p>
+                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 6-26-3289 · <a href="projects/eris/confine-lens/">Details</a></p>
                 </div>
             </article>
 
             <article class="solution">
                 <div class="solution-head">
-                    <i class="fa-solid fa-receipt"></i>
-                    <h3>TRACE</h3>
+                    <a class="solution-thumb" href="projects/eris/trace/"><img src="projects/eris/trace/thumb.jpg" alt=""></a>
+                    <h3><a href="projects/eris/trace/">TRACE</a></h3>
                     <p class="solution-tag">Software understanding assurance for autonomous cyber analysts</p>
                 </div>
                 <div class="solution-body">
                     <p>When an AI agent analyzing software reports "no findings," TRACE shows whether it actually examined and understood the code, with receipts a reviewer can check.</p>
-                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 7-26-3487</p>
+                    <p class="solution-meta"><span class="chip">Awardable</span> ERIS 7-26-3487 · <a href="projects/eris/trace/">Details</a></p>
                 </div>
             </article>
 
         </div>
 
         <p class="r3-add r3-R12 eris-cta">
-            Interested in funding one of these, or have a different direction in mind?
+            Government buyers: search the exact title in the ERIS Marketplace at
+            <a href="https://www.darpaconnect.us/eris">darpaconnect.us/eris</a>.
+            Want one of these, or a different direction?
             <a href="mailto:hello@serenitix.io?subject=ERIS">Email us</a>.
         </p>
 
         <p class="section-note">
             Built on <a href="https://hyperplanes.io">Hyperplanes</a>,
             our open architecture for program analysis.
+            Latest paper: <a href="papers/sure26/">Changes in the Guard (SURE &rsquo;26)</a>.
         </p>
 
     </section>
@@ -347,8 +358,8 @@
     <footer>
 
         <nav class="r3-add r3-R9 footer-nav">
-            <a href="#services">What we do</a>
-            <a href="#proof">Opportunities</a>
+            <a href="#services">Work with us</a>
+            <a href="#proof">Solutions</a>
             <a href="#about">About</a>
             <a href="https://hyperplanes.io">Hyperplanes</a>
             <a href="mailto:hello@serenitix.io">hello@serenitix.io</a>
