@@ -257,10 +257,13 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
     .proj-tag { font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:#4fd5ff; margin:0; }
     .proj-tag b { color:#f2b866; font-weight:700; }
     body.paper-page .hero p.paper-venue a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(79,213,255,.5); }
-    figure.proj-thumb { margin: 0 0 36px; } figure.proj-thumb img { display:block; width:100%; height:auto; border-radius:16px; border:1px solid rgba(255,255,255,.10); }
-    .proj-card { display:grid; grid-template-columns: 260px 1fr; gap: 26px; align-items:start; }
-    .proj-card .proj-card-img img { display:block; width:100%; height:auto; border-radius:12px; border:1px solid rgba(255,255,255,.10); }
-    @media (max-width: 700px) { .proj-card { grid-template-columns: 1fr; gap: 14px; } }
+    body.paper-page .hero .hero-marks { display:flex; justify-content:center; align-items:center; gap:22px; margin: 0 auto 6px; }
+    body.paper-page .hero .hero-marks img.proj-icon { width:150px; height:150px; border-radius:30px; box-shadow: 0 0 40px rgba(79,213,255,.18); }
+    body.paper-page .hero .hero-marks img.eris-badge { width:190px; height:190px; margin:0 -16px; }
+    .proj-card { display:grid; grid-template-columns: 110px 1fr; gap: 26px; align-items:start; }
+    .proj-card a.proj-card-img { border-bottom:none; text-decoration:none; }
+    .proj-card .proj-card-img img { display:block; width:100%; height:auto; border-radius:22px; border:1px solid rgba(255,255,255,.10); }
+    @media (max-width: 700px) { .proj-card { grid-template-columns: 72px 1fr; gap: 16px; } }
     </style>
 
 </head>
@@ -303,7 +306,7 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
     <section class="hero" id="home">
         <div class="hero-content">
             <p class="paper-venue"><a href="../">ERIS solutions</a> &middot; DARPA ERIS · Listing 7-26-3487</p>
-            <img class="eris-badge" src="../eris-awardable-badge.png" alt="ERIS Marketplace Awardable badge">
+            <div class="hero-marks"><img class="proj-icon" src="icon.png" alt="TRACE icon"><img class="eris-badge" src="../eris-awardable-badge.png" alt="ERIS Marketplace Awardable badge"></div>
             <h1>TRACE</h1>
             <p class="hero-sub">Software Understanding Assurance for Autonomous Cyber Analysts</p>
             <p class="paper-meta">Serenitix · <a href="../../../#contact">Contact us about this listing</a></p>
@@ -312,7 +315,6 @@ Contract: Every claim traces to a row of the package's sources.md; exists-today 
 
     <section id="overview">
         <div class="paper-col note-body">
-            <figure class="proj-thumb"><img src="thumb.jpg" alt="TRACE video thumbnail from the ERIS submission: Can you trust it? A trace through the software ends at an assurance receipt."></figure>
             <h3><i class="fa-solid fa-triangle-exclamation"></i>The problem</h3>
             <p>Autonomous cyber analysts are already at work. Here that means AI systems that inspect software on their own, use tools, and return a cyber judgment. They hunt vulnerabilities, triage malware, and reverse unknown binaries in real workflows. The open question is how much to trust what they report.</p>
             <p>These analysts are graded on task success. When one reports "no findings," we cannot tell whether it understood the software or never examined it. That matters because exploits hide in the abstractions and cross-boundary relationships an analyst does not recover. Dynamic analysis has coverage metrics. Autonomous cyber analysts have no measure of what they examined.</p>
