@@ -282,7 +282,6 @@ body.R12.R10 .eris-cta.r3-R12 {
     background: linear-gradient(90deg, #ffffff, #7dd3fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 #proof p.eris-lead { font-size: 1.04rem; line-height: 1.6; color: #c7d2e6; margin: 0; max-width: none; text-align: left; }
 #proof p.eris-lead a { color: #4fd5ff; text-decoration: none; border-bottom: 1px solid rgba(79,213,255,0.5); }
-.solution-icon img { display: block; width: 88px; height: 88px; border-radius: 20px; margin-bottom: 14px; box-shadow: 0 0 28px rgba(79,213,255,0.15); }
 #proof .eris-more { text-align: center; margin: 32px auto 0; color: #c9d6e8; font-size: 1rem; line-height: 1.8; }
 #proof .eris-more a { color: #4fd5ff; text-decoration: none; border-bottom: 1px solid rgba(79,213,255,0.5); }
 @media (max-width: 860px) {
